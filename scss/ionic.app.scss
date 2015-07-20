@@ -21,3 +21,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+// Inlcude RobotoDraft
+$RobotoDraftFontPath: "../lib/robotodraft/fonts";
+$RobotoDraftFontName: "RobotoDraft";
+$RobotoDraftFontVersion: "1.0.0";
+
+@import "www/lib/robotodraft/sass/robotodraft.scss";
+
