@@ -9,7 +9,6 @@ angular.module('dribbble.controllers', [])
     var ref = window.open('https://dribbble.com/oauth/authorize?client_id=93c9bdb5ceed7bc87f6974c7355a78cc9293bb606eca27f369739c80536a8f18', '_blank', 'location=no');
 
     ref.addEventListener('loadstart', function(event) {
-      alert("foobar");
       if((event.url).startsWith("http://localhost/callback")) {
         code = (event.url).split("code=")[1];
         $http({
