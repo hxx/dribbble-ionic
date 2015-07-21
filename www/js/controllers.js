@@ -45,17 +45,76 @@ angular.module('dribbble.controllers', [])
   }
 })
 
-.controller('shotsCtrl', function($http, $scope, $state) {
+.controller('shotsCtrl', function($http, $scope, $state, $timeout, $ionicLoading, $ionicPopup) {
   if(window.localStorage.getItem("access_token") !== null) {
-    $http({
-      method: 'GET',
-      url: 'https://api.dribbble.com/v1/shots',
-      params: {
-        access_token: window.localStorage.getItem("access_token")
+
+    $scope.current_page = 0;
+    $scope.shots = [];
+
+    $scope.loadMoreShots = function() {
+      $http({
+        method: 'GET',
+        url: 'https://api.dribbble.com/v1/shots',
+        params: {
+          access_token: window.localStorage.getItem("access_token"),
+          page: $scope.current_page
+        }
+      }).success(function(data) {
+        $ionicLoading.hide();
+        $scope.shots.push.apply($scope.shots, data);
+        window.localStorage["shots"] = JSON.stringify($scope.shots);
+        $scope.moreShots = data;
+        $scope.current_page += 1;
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      }).error(function(){
+        $ionicLoading.hide();
+        $scope.shots = JSON.parse(window.localStorage["shots"]);
+        $ionicPopup.alert({
+          title: "网络连接发生错误",
+        });
+      });
+    };
+
+    $scope.loadMoreShots();
+
+    $scope.moreShotsCanBeLoaded = function() {
+      if ($scope.moreShots && $scope.moreShots.length != 0) {
+        return true;
       }
-    }).success(function(data) {
-      $scope.shots = data;
-    })
+      else {
+        return false;
+      }
+    }
+
+    // pull to refresh
+    $scope.shotsRefresh = function() {
+      $timeout(function() {
+        $scope.current_page = 1;
+        $scope.shots = [];
+        $http({
+          method: 'GET',
+          url: 'https://api.dribbble.com/v1/shots',
+          params: {
+            access_token: window.localStorage.getItem("access_token"),
+            page: $scope.current_page
+          },
+          timeout: 3000
+        }).success(function(data) {
+          $scope.shots.push.apply($scope.shots, data);
+          window.localStorage["shots"] = JSON.stringify($scope.shots);
+          $scope.current_page += 1;
+        }).error(function(){
+          $scope.shots = JSON.parse(window.localStorage["shots"]);
+          $ionicPopup.alert({
+            title: "网络连接发生错误",
+          });
+        })
+        //Stop the ion-refresher from spinning
+        .finally(function() {
+          $scope.$broadcast('scroll.refreshComplete');
+        })
+      }, 1000);
+    };
   }
   else {
     $state.go('login');

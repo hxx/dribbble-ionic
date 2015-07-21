@@ -1,5 +1,7 @@
 <ion-view view-title="Shots">
   <ion-content class="padding">
+    <ion-refresher on-refresh="shotsRefresh()">
+    </ion-refresher>
     <div class="list card" ng-repeat="shot in shots">
       <div class="item item-avatar shot-item-avatar">
         <img ng-src="{{shot.user.avatar_url}}">
@@ -23,5 +25,10 @@
         </a>
       </div>
     </div>
+    <ion-infinite-scroll
+      ng-if="moreShotsCanBeLoaded()"
+      on-infinite="loadMoreShots()"
+      distance="1%">
+    </ion-infinite-scroll>
   </ion-content>
 </ion-view>
