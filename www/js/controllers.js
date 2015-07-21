@@ -46,6 +46,9 @@ angular.module('dribbble.controllers', [])
 
 .controller('shotsCtrl', function($http, $scope, $state, $timeout, $ionicLoading, $ionicPopup) {
   if(window.localStorage.getItem("access_token") !== null) {
+    $ionicLoading.show({
+      template: 'Loading...',
+    });
 
     $scope.current_page = 0;
     $scope.shots = [];
@@ -118,4 +121,26 @@ angular.module('dribbble.controllers', [])
   else {
     $state.go('login');
   }
+})
+
+.controller('shotCtrl', function($ionicLoading, $http, $scope, $stateParams) {
+  $ionicLoading.show({
+    template: 'Loading...',
+  });
+
+  $http({
+    method: "GET",
+    url: 'https://api.dribbble.com/v1/shots/' + $stateParams.shotId,
+    params: {
+      access_token: window.localStorage.getItem("access_token")
+    },
+    timeout: 3000
+  }).success(function(data) {
+    $ionicLoading.hide();
+    $scope.shot = data;
+    window.localStorage["shot-" + $stateParams.shotId] = JSON.stringify($scope.shot);
+  }).error(function() {
+    $ionicLoading.hide();
+    $scope.shot = JSON.parse(window.localStorage["shot-" + $stateParams.shotId]);
+  });
 })

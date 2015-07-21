@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <ion-refresher on-refresh="shotsRefresh()">
     </ion-refresher>
-    <div class="list card" ng-repeat="shot in shots">
+    <a href="#/app/shots/{{shot.id}}" class="list card shot-card" ng-repeat="shot in shots">
       <div class="item item-avatar shot-item-avatar">
         <img ng-src="{{shot.user.avatar_url}}">
         <h2>{{shot.title}}</h2>
@@ -11,20 +11,20 @@
         <img ng-src="{{shot.images.normal}}">
       </div>
       <div class="item tabs tabs-secondary tabs-icon-left in">
-        <a class="tab-item assertive">
+        <span class="tab-item assertive shot-tab">
           <i class="icon ion-eye"></i>
           {{shot.views_count}}
-        </a>
-        <a class="tab-item assertive">
+        </span>
+        <span class="tab-item assertive shot-tab">
           <i class="icon ion-android-favorite-outline"></i>
           {{shot.likes_count}}
-        </a>
-        <a class="tab-item assertive">
+        </span>
+        <span class="tab-item assertive shot-tab">
           <i class="icon ion-android-chat"></i>
           {{shot.comments_count}}
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
     <ion-infinite-scroll
       ng-if="moreShotsCanBeLoaded()"
       on-infinite="loadMoreShots()"

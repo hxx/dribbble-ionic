@@ -34,3 +34,32 @@ $RobotoDraftFontVersion: "1.0.0";
     white-space: normal;
   }
 }
+
+.shot-card {
+  text-decoration: none;
+  .shot-tab {
+    font-size: 14px !important;
+  }
+}
+
+.shot-page {
+  img {
+    width: 100%;
+  }
+  .shot-avatar {
+    float: right;
+    right: 10px;
+    top: -34px;
+  }
+  .shot-content {
+    text-align: center;
+    margin: 0 58px;
+  }
+  .shot-tags {
+    text-align: center;
+    .tag-button {
+      padding: 0 10px 0 10px;
+      margin: 5px;
+    }
+  }
+}

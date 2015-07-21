@@ -7785,3 +7785,23 @@ a.button {
   min-height: 58px !important; }
   .shot-item-avatar h2 {
     white-space: normal; }
+
+.shot-card {
+  text-decoration: none; }
+  .shot-card .shot-tab {
+    font-size: 14px !important; }
+
+.shot-page img {
+  width: 100%; }
+.shot-page .shot-avatar {
+  float: right;
+  right: 10px;
+  top: -34px; }
+.shot-page .shot-content {
+  text-align: center;
+  margin: 0 58px; }
+.shot-page .shot-tags {
+  text-align: center; }
+  .shot-page .shot-tags .tag-button {
+    padding: 0 10px 0 10px;
+    margin: 5px; }
