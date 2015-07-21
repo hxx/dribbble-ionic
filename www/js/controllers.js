@@ -50,7 +50,7 @@ angular.module('dribbble.controllers', [])
       template: 'Loading...',
     });
 
-    $scope.current_page = 0;
+    $scope.current_page = 1;
     $scope.shots = [];
 
     $scope.loadMoreShots = function() {
