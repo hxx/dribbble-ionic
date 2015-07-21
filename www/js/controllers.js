@@ -1,56 +1,48 @@
-angular.module('starter.controllers', [])
+angular.module('dribbble.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $http, $state, $ionicHistory) {
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
+  // https://blog.nraboy.com/2014/07/using-oauth-2-0-service-ionicframework
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+  
   $scope.login = function() {
-    $scope.modal.show();
+    var ref = window.open('https://dribbble.com/oauth/authorize?client_id=93c9bdb5ceed7bc87f6974c7355a78cc9293bb606eca27f369739c80536a8f18', '_blank', 'location=no');
+
+    ref.addEventListener('loadstart', function(event) {
+      alert("foobar");
+      if((event.url).startsWith("http://localhost/callback")) {
+        code = (event.url).split("code=")[1];
+        $http({
+          method: 'POST',
+          url: 'https://dribbble.com/oauth/token',
+          params: {
+            client_id: '93c9bdb5ceed7bc87f6974c7355a78cc9293bb606eca27f369739c80536a8f18',
+            client_secret: 'ea44e8487d8085a25bf836c9a9570cea67ea892f9377dbe8284f2cb70bad371d',
+            code: code
+          }
+        }).success(function(data) {
+          window.localStorage.setItem("access_token", data.access_token);
+        }).error(function(data, status) {
+          alert("ERROR: " + data);
+        });
+        ref.close();
+      }
+    });
+  
+    if (typeof String.prototype.startsWith != 'function') {
+      String.prototype.startsWith = function(str) {
+        return this.indexOf(str) == 0;
+      };
+    }
   };
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+  if(window.localStorage.getItem("access_token") !== null) {
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
+    });
+    $state.go("app.shots");
+  }
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
 })
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
