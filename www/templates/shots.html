@@ -1,0 +1,27 @@
+<ion-view view-title="Shots">
+  <ion-content class="padding">
+    <div class="list card" ng-repeat="shot in shots">
+      <div class="item item-avatar shot-item-avatar">
+        <img ng-src="{{shot.user.avatar_url}}">
+        <h2>{{shot.title}}</h2>
+      </div>
+      <div class="item">
+        <img ng-src="{{shot.images.normal}}">
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left in">
+        <a class="tab-item assertive">
+          <i class="icon ion-eye"></i>
+          {{shot.views_count}}
+        </a>
+        <a class="tab-item assertive">
+          <i class="icon ion-android-favorite-outline"></i>
+          {{shot.likes_count}}
+        </a>
+        <a class="tab-item assertive">
+          <i class="icon ion-android-chat"></i>
+          {{shot.comments_count}}
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

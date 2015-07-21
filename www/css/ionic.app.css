@@ -7781,3 +7781,7 @@ a.button {
   font-style: normal; }
 
 /* END Black */
+.shot-item-avatar {
+  min-height: 58px !important; }
+  .shot-item-avatar h2 {
+    white-space: normal; }

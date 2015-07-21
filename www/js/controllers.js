@@ -45,4 +45,19 @@ angular.module('dribbble.controllers', [])
   }
 })
 
+.controller('shotsCtrl', function($http, $scope, $state) {
+  if(window.localStorage.getItem("access_token") !== null) {
+    $http({
+      method: 'GET',
+      url: 'https://api.dribbble.com/v1/shots',
+      params: {
+        access_token: window.localStorage.getItem("access_token")
+      }
+    }).success(function(data) {
+      $scope.shots = data;
+    })
+  }
+  else {
+    $state.go('login');
+  }
 })
