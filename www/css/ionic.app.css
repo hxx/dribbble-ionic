@@ -7805,3 +7805,15 @@ a.button {
   .shot-page .shot-tags .tag-button {
     padding: 0 10px 0 10px;
     margin: 5px; }
+
+.user-page .user-avatar {
+  display: block;
+  margin: 20px auto 10px;
+  width: 100px !important;
+  height: 100px !important; }
+  .user-page .user-avatar img {
+    width: 100%; }
+.user-page .user-content {
+  text-align: center; }
+.user-page .item-icon-left .icon {
+  font-size: 16px; }

@@ -52,6 +52,16 @@ angular.module('dribbble', ['ionic', 'ionic-material', 'dribbble.controllers'])
     }
   })
 
+  .state('app.user', {
+    url: "/users/:userId",
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/user.html',
+        controller: 'userCtrl'
+      }
+    }
+  })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/shots');
 });

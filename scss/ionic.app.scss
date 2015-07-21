@@ -63,3 +63,22 @@ $RobotoDraftFontVersion: "1.0.0";
     }
   }
 }
+
+.user-page {
+  .user-avatar {
+    display: block;
+    margin: 20px auto 10px;
+    width: 100px !important;
+    height: 100px !important;
+    img {
+      width: 100%;
+    }
+  }
+  .user-content {
+    text-align: center;
+  }
+  .item-icon-left .icon {
+    font-size: 16px;
+  }
+}
+

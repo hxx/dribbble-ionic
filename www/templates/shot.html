@@ -3,9 +3,9 @@
   <ion-content>
     <div class="shot-page">
       <img ng-src="{{shot.images.normal}}">
-      <button class="button button-fab shot-avatar">
+      <a class="button button-fab shot-avatar" ng-href="#/app/users/{{shot.user.id}}">
         <img ng-src="{{shot.user.avatar_url}}">
-      </button>
+      </a>
       <div class="shot-content">
         <h3>{{shot.title}}</h3>
         <div ng-bind-html="shot.description"></div>
