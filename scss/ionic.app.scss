@@ -64,6 +64,14 @@ $RobotoDraftFontVersion: "1.0.0";
       margin: 5px;
     }
   }
+  .shot-comments {
+    .comment-body p {
+      white-space: normal;
+    }
+    .comment-likes-count {
+      font-size: 18px;
+    }
+  }
 }
 
 .user-page {

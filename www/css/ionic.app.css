@@ -7806,6 +7806,10 @@ a.button {
   .shot-page .shot-tags .tag-button {
     padding: 0 10px 0 10px;
     margin: 5px; }
+.shot-page .shot-comments .comment-body p {
+  white-space: normal; }
+.shot-page .shot-comments .comment-likes-count {
+  font-size: 18px; }
 
 .user-page .user-avatar {
   display: block;
@@ -7818,3 +7822,6 @@ a.button {
   text-align: center; }
 .user-page .item-icon-left .icon {
   font-size: 16px; }
+
+.scroll-refresher .ionic-refresher-content {
+  bottom: 22px; }

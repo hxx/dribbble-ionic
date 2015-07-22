@@ -143,6 +143,22 @@ angular.module('dribbble.controllers', [])
     $ionicLoading.hide();
     $scope.shot = JSON.parse(window.localStorage["shot-" + $stateParams.shotId]);
   });
+
+  $http({
+    method: "GET",
+    url: 'https://api.dribbble.com/v1/shots/' + $stateParams.shotId + '/comments',
+    params: {
+      access_token: window.localStorage.getItem("access_token")
+    },
+    timeout: 3000
+  }).success(function(data) {
+    $ionicLoading.hide();
+    $scope.comments = data;
+    window.localStorage["shot-" + $stateParams.shotId + "-comments"] = JSON.stringify($scope.comments);
+  }).error(function() {
+    $ionicLoading.hide();
+    $scope.comments = JSON.parse(window.localStorage["shot-" + $stateParams.shotId + "-comments"]);
+  });
 })
 
 .controller('userCtrl', function($ionicLoading, $http, $scope, $stateParams) {

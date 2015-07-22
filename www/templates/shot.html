@@ -15,6 +15,17 @@
         {{tag}}
         </button>
       </div>
+      <div class="list shot-comments" ng-repeat="comment in comments">
+        <a class="item item-avatar item-icon-right">
+          <img ng-src="{{comment.user.avatar_url}}">
+          <h2 class="comment-user-name">{{comment.user.name}}</h2>
+          <div ng-bind-html="comment.body" class="comment-body"></div>
+          <!-- TODO add comment like click here -->
+          <i class="icon ion-heart muted comment-likes-count">
+            {{comment.likes_count}}
+          </i>
+        </a>
+      </div>
     </div>
   </ion-content>
 </ion-view>
