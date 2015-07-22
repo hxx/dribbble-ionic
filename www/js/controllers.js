@@ -1,6 +1,6 @@
-angular.module('dribbble.controllers', [])
+angular.module('dribbble.controllers', ['ngCordova'])
 
-.controller('AppCtrl', function($ionicPopover, $scope, $http, $state, $ionicHistory, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('AppCtrl', function($ionicPopover, $scope, $http, $state, $ionicHistory, $timeout, ionicMaterialInk, ionicMaterialMotion, $cordovaToast) {
 
   $ionicPopover.fromTemplateUrl('templates/popover.html', {
     scope: $scope,
@@ -27,8 +27,11 @@ angular.module('dribbble.controllers', [])
           }
         }).success(function(data) {
           window.localStorage.setItem("access_token", data.access_token);
+          $cordovaToast.show('登录成功！', 'short', 'bottom');
         }).error(function(data, status) {
-          alert("ERROR: " + data);
+          $ionicPopup.alert({
+            title: "网络连接发生错误",
+          });
         });
         ref.close();
         $http({
@@ -41,7 +44,9 @@ angular.module('dribbble.controllers', [])
           $scope.user = data;
           window.localStorage.setItem("user", data);
         }).error(function(data, status) {
-          alert("ERROR: " + data);
+          $ionicPopup.alert({
+            title: "网络连接发生错误",
+          });
         });
       }
     });
@@ -57,6 +62,7 @@ angular.module('dribbble.controllers', [])
     $scope.popover.hide();
     window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
     $scope.user = null;
+    $cordovaToast.show('您已退出登录', 'short', 'bottom');
   };
 
   if (window.localStorage.getItem("access_token") !== null) {
@@ -76,7 +82,9 @@ angular.module('dribbble.controllers', [])
         $scope.user = data;
         window.localStorage.setItem("user", data);
       }).error(function(data, status) {
-        alert("ERROR: " + data);
+        $ionicPopup.alert({
+          title: "网络连接发生错误",
+        });
       });
     }
   }
