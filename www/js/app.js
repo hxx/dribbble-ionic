@@ -14,7 +14,9 @@ angular.module('dribbble', ['ionic', 'ionic-material', 'dribbble.controllers'])
       StatusBar.styleDefault();
     }
 
-    window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
+    if (window.localStorage.getItem("access_token") === null) {
+      window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
+    }
   });
 })
 

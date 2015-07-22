@@ -7825,3 +7825,9 @@ a.button {
 
 .scroll-refresher .ionic-refresher-content {
   bottom: 22px; }
+
+.popover {
+  height: inherit; }
+
+.menu-avatar {
+  margin-bottom: 20px !important; }

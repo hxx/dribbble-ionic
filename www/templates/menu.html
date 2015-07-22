@@ -8,23 +8,30 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-more" ng-click="popover.show($event)"></button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-energized">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
     <ion-content>
-      <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/shots">
-          Shots
-        </ion-item>
-      </ion-list>
+      <ion-header-bar class="bar-energized">
+        <h1 class="title">Menu</h1>
+      </ion-header-bar>
+      <div class="hero has-mask">
+        <div class="content menu-avatar">
+          <a href="#/app/shots" menu-close class="avatar" style="background-image: url('{{user.avatar_url}}');"></a>
+          <h3><a href="#/app/shots" menu-close class="light">{{user.name}}</a></h3>
+        </div>
+      </div>
+      <ul class="list animate-ripple">
+        <a class="item" menu-close ng-click="login()">Login</a>
+        <a href="#/app/shots" class="item" menu-close>Shots</a>
+        <a href="#/app/settings" class="item" menu-close>Settings</a>
+      </ul>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

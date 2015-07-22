@@ -1,6 +1,12 @@
 angular.module('dribbble.controllers', [])
 
-.controller('AppCtrl', function($scope, $http, $state, $ionicHistory) {
+.controller('AppCtrl', function($ionicPopover, $scope, $http, $state, $ionicHistory, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+
+  $ionicPopover.fromTemplateUrl('templates/popover.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
   // https://blog.nraboy.com/2014/07/using-oauth-2-0-service-ionicframework
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -25,6 +31,18 @@ angular.module('dribbble.controllers', [])
           alert("ERROR: " + data);
         });
         ref.close();
+        $http({
+          method: 'GET',
+          url: 'https://api.dribbble.com/v1/user',
+          params: {
+            access_token: window.localStorage.getItem("access_token")
+          }
+        }).success(function(data) {
+          $scope.user = data;
+          window.localStorage.setItem("user", data);
+        }).error(function(data, status) {
+          alert("ERROR: " + data);
+        });
       }
     });
   
@@ -35,13 +53,39 @@ angular.module('dribbble.controllers', [])
     }
   };
 
-  if(window.localStorage.getItem("access_token") !== null) {
+  $scope.logout = function() {
+    $scope.popover.hide();
+    window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
+    $scope.user = null;
+  };
+
+  if (window.localStorage.getItem("access_token") !== null) {
     $ionicHistory.nextViewOptions({
       disableAnimate: true,
       disableBack: true
     });
     $state.go("app.shots");
+    if (window.localStorage.getItem("access_token") !== "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e") {
+      $http({
+        method: 'GET',
+        url: 'https://api.dribbble.com/v1/user',
+        params: {
+          access_token: window.localStorage.getItem("access_token")
+        }
+      }).success(function(data) {
+        $scope.user = data;
+        window.localStorage.setItem("user", data);
+      }).error(function(data, status) {
+        alert("ERROR: " + data);
+      });
+    }
   }
+
+  // Activate ink for controller
+  ionicMaterialInk.displayEffect();
+
+  // Set Motion
+  ionicMaterialMotion.ripple();
 })
 
 .controller('shotsCtrl', function($http, $scope, $state, $timeout, $ionicLoading, $ionicPopup) {
