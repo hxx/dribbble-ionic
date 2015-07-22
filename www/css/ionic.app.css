@@ -7781,13 +7781,14 @@ a.button {
   font-style: normal; }
 
 /* END Black */
-.shot-item-avatar {
-  min-height: 58px !important; }
-  .shot-item-avatar h2 {
-    white-space: normal; }
-
 .shot-card {
   text-decoration: none; }
+  .shot-card .shot-avatar {
+    min-height: 58px !important; }
+    .shot-card .shot-avatar h2 {
+      white-space: normal; }
+  .shot-card .shot-img {
+    padding-top: 6px; }
   .shot-card .shot-tab {
     font-size: 14px !important; }
 

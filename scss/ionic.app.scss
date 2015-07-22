@@ -28,15 +28,17 @@ $RobotoDraftFontVersion: "1.0.0";
 
 @import "www/lib/robotodraft/sass/robotodraft.scss";
 
-.shot-item-avatar {
-  min-height: 58px !important;
-  h2 {
-    white-space: normal;
-  }
-}
-
 .shot-card {
   text-decoration: none;
+  .shot-avatar {
+    min-height: 58px !important;
+    h2 {
+      white-space: normal;
+    }
+  }
+  .shot-img {
+    padding-top: 6px;
+  }
   .shot-tab {
     font-size: 14px !important;
   }
