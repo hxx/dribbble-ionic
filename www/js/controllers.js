@@ -177,7 +177,7 @@ angular.module('dribbble.controllers', ['ngCordova'])
   }
 })
 
-.controller('shotCtrl', function($ionicLoading, $http, $scope, $stateParams) {
+.controller('shotCtrl', function($ionicLoading, $http, $scope, $stateParams, $ionicPopup) {
   $ionicLoading.show({
     template: 'Loading...',
   });
@@ -221,7 +221,7 @@ angular.module('dribbble.controllers', ['ngCordova'])
   });
 })
 
-.controller('userCtrl', function($ionicLoading, $http, $scope, $stateParams) {
+.controller('userCtrl', function($ionicLoading, $http, $scope, $stateParams, $ionicPopup) {
   $ionicLoading.show({
     template: 'Loading...',
   });
