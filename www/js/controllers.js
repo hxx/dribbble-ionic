@@ -111,7 +111,8 @@ angular.module('dribbble.controllers', ['ngCordova'])
         url: 'https://api.dribbble.com/v1/shots',
         params: {
           access_token: window.localStorage.getItem("access_token"),
-          page: $scope.current_page
+          page: $scope.current_page,
+          per_page: 6
         }
       }).success(function(data) {
         $ionicLoading.hide();
@@ -150,7 +151,8 @@ angular.module('dribbble.controllers', ['ngCordova'])
           url: 'https://api.dribbble.com/v1/shots',
           params: {
             access_token: window.localStorage.getItem("access_token"),
-            page: $scope.current_page
+            page: $scope.current_page,
+            per_page: 6
           },
           timeout: 3000
         }).success(function(data) {
