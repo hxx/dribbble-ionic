@@ -196,6 +196,9 @@ angular.module('dribbble.controllers', ['ngCordova'])
   }).error(function() {
     $ionicLoading.hide();
     $scope.shot = JSON.parse(window.localStorage["shot-" + $stateParams.shotId]);
+    $ionicPopup.alert({
+      title: "网络连接发生错误",
+    });
   });
 
   $http({
@@ -212,6 +215,9 @@ angular.module('dribbble.controllers', ['ngCordova'])
   }).error(function() {
     $ionicLoading.hide();
     $scope.comments = JSON.parse(window.localStorage["shot-" + $stateParams.shotId + "-comments"]);
+    $ionicPopup.alert({
+      title: "网络连接发生错误",
+    });
   });
 })
 
@@ -234,5 +240,8 @@ angular.module('dribbble.controllers', ['ngCordova'])
   }).error(function() {
     $ionicLoading.hide();
     $scope.user = JSON.parse(window.localStorage["user-" + $stateParams.userId]);
+    $ionicPopup.alert({
+      title: "网络连接发生错误",
+    });
   });
 })
