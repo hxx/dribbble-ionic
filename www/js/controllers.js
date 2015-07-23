@@ -175,6 +175,10 @@ angular.module('dribbble.controllers', ['ngCordova'])
   else {
     $state.go('login');
   }
+
+  $scope.setMarginTop = function(index) {
+    return (index * 16) + 'px';
+  }
 })
 
 .controller('shotCtrl', function($ionicLoading, $http, $scope, $stateParams, $ionicPopup) {

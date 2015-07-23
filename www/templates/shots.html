@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <ion-refresher on-refresh="shotsRefresh()">
     </ion-refresher>
-    <div class="card shot-card" ng-repeat="shot in shots">
+    <div class="card shot-card" collection-repeat="shot in shots" ng-style="{'margin-top': setMarginTop($index)}">
       <a class="item item-avatar shot-avatar" href="#/app/users/{{shot.user.id}}">
         <img ng-src="{{shot.user.avatar_url}}">
       </a>
