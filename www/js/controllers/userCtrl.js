@@ -1,10 +1,12 @@
 dribbble.controller('userCtrl',
- ['$scope',
+[
+  '$window'
+  '$scope',
   '$stateParams',
   '$ionicLoading',
   '$ionicPopup',
   'Users',
-  function($scope, $stateParams, $ionicLoading, $ionicPopup, Users) {
+  function($window, $scope, $stateParams, $ionicLoading, $ionicPopup, Users) {
   $ionicLoading.show({
     template: 'Loading...',
   });
@@ -18,11 +20,11 @@ dribbble.controller('userCtrl',
     function(value) {
       $ionicLoading.hide();
       $scope.user = value;
-      window.localStorage["user-" + $stateParams.userId] = JSON.stringify($scope.user);
+      $window.localStorage["user-" + $stateParams.userId] = JSON.stringify($scope.user);
     },
     function(error) {
       $ionicLoading.hide();
-      $scope.user = JSON.parse(window.localStorage["user-" + $stateParams.userId]);
+      $scope.user = JSON.parse($window.localStorage["user-" + $stateParams.userId]);
       $ionicPopup.alert({
         title: "网络连接发生错误",
       });

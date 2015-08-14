@@ -1,12 +1,14 @@
 dribbble.controller('shotsCtrl',
- ['$scope',
+[
+  '$window',
+  '$scope',
   '$state',
   '$timeout',
   '$ionicLoading',
   '$ionicPopup',
   'Shots',
-  function($scope, $state, $timeout, $ionicLoading, $ionicPopup, Shots) {
-  if(window.localStorage.getItem("access_token") !== null) {
+  function($window, $scope, $state, $timeout, $ionicLoading, $ionicPopup, Shots) {
+  if($window.localStorage.getItem("access_token") !== null) {
     $ionicLoading.show({
       template: 'Loading...',
     });
@@ -22,14 +24,14 @@ dribbble.controller('shotsCtrl',
         function(value){
           $ionicLoading.hide();
           $scope.shots.push.apply($scope.shots, value);
-          window.localStorage["shots"] = JSON.stringify($scope.shots);
+          $window.localStorage["shots"] = JSON.stringify($scope.shots);
           $scope.moreShots = value;
           $scope.current_page += 1;
           $scope.$broadcast('scroll.infiniteScrollComplete');
         },
         function(error){
           $ionicLoading.hide();
-          $scope.shots = JSON.parse(window.localStorage["shots"]);
+          $scope.shots = JSON.parse($window.localStorage["shots"]);
           $ionicPopup.alert({
             title: "网络连接发生错误",
           });
@@ -59,11 +61,11 @@ dribbble.controller('shotsCtrl',
         .$promise.then(
           function(value){
             $scope.shots.push.apply($scope.shots, value);
-            window.localStorage["shots"] = JSON.stringify($scope.shots);
+            $window.localStorage["shots"] = JSON.stringify($scope.shots);
             $scope.current_page += 1;
           },
           function(error){
-            $scope.shots = JSON.parse(window.localStorage["shots"]);
+            $scope.shots = JSON.parse($window.localStorage["shots"]);
             $ionicPopup.alert({
               title: "网络连接发生错误",
             });

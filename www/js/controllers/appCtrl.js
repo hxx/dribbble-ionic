@@ -1,5 +1,7 @@
 dribbble.controller('appCtrl',
- ['$scope',
+[
+  '$window',
+  '$scope',
   '$http',
   '$state',
   '$timeout',
@@ -9,7 +11,7 @@ dribbble.controller('appCtrl',
   'ionicMaterialInk',
   'ionicMaterialMotion',
   'User',
-  function($scope, $http, $state, $timeout, $ionicHistory, $ionicPopover, $cordovaToast, ionicMaterialInk, ionicMaterialMotion, User) {
+  function($window, $scope, $http, $state, $timeout, $ionicHistory, $ionicPopover, $cordovaToast, ionicMaterialInk, ionicMaterialMotion, User) {
   $ionicPopover.fromTemplateUrl('templates/popover.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -20,7 +22,7 @@ dribbble.controller('appCtrl',
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
   $scope.login = function() {
-    var ref = window.open('https://dribbble.com/oauth/authorize?client_id=93c9bdb5ceed7bc87f6974c7355a78cc9293bb606eca27f369739c80536a8f18', '_blank', 'location=no');
+    var ref = $window.open('https://dribbble.com/oauth/authorize?client_id=93c9bdb5ceed7bc87f6974c7355a78cc9293bb606eca27f369739c80536a8f18', '_blank', 'location=no');
 
     ref.addEventListener('loadstart', function(event) {
       if((event.url).startsWith("http://localhost/callback")) {
@@ -34,7 +36,7 @@ dribbble.controller('appCtrl',
             code: code
           }
         }).success(function(data) {
-          window.localStorage.setItem("access_token", data.access_token);
+          $window.localStorage.setItem("access_token", data.access_token);
           $cordovaToast.show('登录成功！', 'short', 'bottom');
         }).error(function(data, status) {
           $ionicPopup.alert({
@@ -46,7 +48,7 @@ dribbble.controller('appCtrl',
         .$promise.then(
           function(value) {
             $scope.user = value;
-            window.localStorage.setItem("user", $scope.user);
+            $window.localStorage.setItem("user", $scope.user);
           },
           function(error) {
             $ionicPopup.alert({
@@ -66,23 +68,23 @@ dribbble.controller('appCtrl',
 
   $scope.logout = function() {
     $scope.popover.hide();
-    window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
+    $window.localStorage.setItem("access_token", "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e");
     $scope.user = null;
     $cordovaToast.show('您已退出登录', 'short', 'bottom');
   };
 
-  if (window.localStorage.getItem("access_token") !== null) {
+  if ($window.localStorage.getItem("access_token") !== null) {
     $ionicHistory.nextViewOptions({
       disableAnimate: true,
       disableBack: true
     });
     $state.go("app.shots");
-    if (window.localStorage.getItem("access_token") !== "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e") {
+    if ($window.localStorage.getItem("access_token") !== "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e") {
       User.get()
       .$promise.then(
         function(value) {
           $scope.user = value;
-          window.localStorage.setItem("user", $scope.user);
+          $window.localStorage.setItem("user", $scope.user);
         },
         function(error) {
           $ionicPopup.alert({
