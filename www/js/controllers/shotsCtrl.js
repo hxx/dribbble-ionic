@@ -1,18 +1,3 @@
-dribbble.controller('shotsCtrl', ['$scope', 'Shots', function($scope, Shots){
-  Shots.query(
-    { per_page: 6 }
-  )
-  .$promise.then(
-    function(value){
-      console.log("foobar");
-      $scope.shots = value;
-    },
-    function(error){
-      console.log(error);
-    }
-  );
-}])
-
 dribbble.controller('shotsCtrl', ['$scope', '$state', '$timeout', '$ionicLoading', '$ionicPopup', 'Shots', function($scope, $state, $timeout, $ionicLoading, $ionicPopup, Shots) {
   if(window.localStorage.getItem("access_token") !== null) {
     $ionicLoading.show({
