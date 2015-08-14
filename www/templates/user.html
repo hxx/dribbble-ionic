@@ -1,0 +1,39 @@
+<ion-view>
+  <ion-nav-title>{{user.name}}</ion-nav-title>
+  <ion-content class="user-page">
+    <div class="button button-fab user-avatar">
+      <img ng-src="{{user.avatar_url}}">
+    </div>
+    <div class="user-content">
+      <h2>{{user.name}}</h2>
+      <div ng-bind-html="user.bio"></div>
+    </div>
+    <!-- TODO add links for this list -->
+    <div class="list">
+      <a class="item item-icon-left location">
+        <i class="icon ion-location">{{user.location}}</i>
+      </a>
+      <a class="item item-icon-left link">
+        <i class="icon ion-link">{{user.links.web}}</i>
+      </a>
+      <a class="item item-icon-left twitter">
+        <i class="icon ion-social-twitter">{{user.links.twitter}}</i>
+      </a>
+      <a class="item item-icon-left likes">
+        <i class="icon ion-heart">{{user.likes_count}}</i>
+      </a>
+      <a class="item item-icon-left buckets">
+        <i class="icon ion-beer">{{user.buckets_count}}</i>
+      </a>
+      <a class="item item-icon-left shots">
+        <i class="icon ion-pinpoint">{{user.shots_count}}</i>
+      </a>      
+      <a class="item item-icon-left shots">
+        <i class="icon ion-person-add">{{user.followers_count}}</i>
+      </a>
+      <a class="item item-icon-left shots">
+        <i class="icon ion-person">{{user.followings_count}}</i>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-view>
+  <ion-nav-title>{{shot.title}}</ion-nav-title>
+  <ion-content>
+    <div class="shot-page">
+      <img ng-src="{{shot.images.hidpi}}">
+      <a class="button button-fab shot-avatar" ng-href="#/app/users/{{shot.user.id}}">
+        <img ng-src="{{shot.user.avatar_url}}">
+      </a>
+      <div class="shot-content">
+        <h3>{{shot.title}}</h3>
+        <div ng-bind-html="shot.description"></div>
+      </div>
+      <div class="shot-tags">
+        <button class="button button-small tag-button" ng-repeat="tag in shot.tags">
+        {{tag}}
+        </button>
+      </div>
+      <div class="list shot-comments" ng-repeat="comment in comments">
+        <a class="item item-avatar item-icon-right">
+          <img ng-src="{{comment.user.avatar_url}}">
+          <h2 class="comment-user-name">{{comment.user.name}}</h2>
+          <div ng-bind-html="comment.body" class="comment-body"></div>
+          <!-- TODO add comment like click here -->
+          <i class="icon ion-heart muted comment-likes-count">
+            {{comment.likes_count}}
+          </i>
+        </a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

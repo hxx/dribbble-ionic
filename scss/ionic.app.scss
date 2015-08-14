@@ -21,3 +21,85 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+// Inlcude RobotoDraft
+$RobotoDraftFontPath: "../lib/robotodraft/fonts";
+$RobotoDraftFontName: "RobotoDraft";
+$RobotoDraftFontVersion: "1.0.0";
+
+@import "www/lib/robotodraft/sass/robotodraft.scss";
+
+.shot-card {
+  text-decoration: none;
+  .shot-avatar {
+    min-height: 58px !important;
+    h2 {
+      white-space: normal;
+    }
+  }
+  .shot-img {
+    padding-top: 6px;
+  }
+  .shot-tab {
+    font-size: 14px !important;
+  }
+}
+
+.shot-page {
+  img {
+    width: 100%;
+  }
+  .shot-avatar {
+    float: right;
+    right: 10px;
+    top: -34px;
+  }
+  .shot-content {
+    text-align: center;
+    margin: 0 58px;
+  }
+  .shot-tags {
+    text-align: center;
+    .tag-button {
+      padding: 0 10px 0 10px;
+      margin: 5px;
+    }
+  }
+  .shot-comments {
+    .comment-body p {
+      white-space: normal;
+    }
+    .comment-likes-count {
+      font-size: 18px;
+    }
+  }
+}
+
+.user-page {
+  .user-avatar {
+    display: block;
+    margin: 20px auto 10px;
+    width: 100px !important;
+    height: 100px !important;
+    img {
+      width: 100%;
+    }
+  }
+  .user-content {
+    text-align: center;
+  }
+  .item-icon-left .icon {
+    font-size: 16px;
+  }
+}
+
+.scroll-refresher .ionic-refresher-content {
+  bottom: 22px;
+}
+
+.popover {
+  height: inherit;
+}
+
+.menu-avatar {
+  margin-bottom: 20px !important;
+}

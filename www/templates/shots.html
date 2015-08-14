@@ -1,0 +1,37 @@
+<ion-view view-title="Shots">
+  <ion-content class="padding">
+    <ion-refresher on-refresh="shotsRefresh()">
+    </ion-refresher>
+    <!-- FIXME fix item height of horizontal screen -->
+    <div class="card shot-card" collection-repeat="shot in shots" item-height="shot.height + 96" ng-style="{'margin-top': setMarginTop($index)}">
+      <a class="item item-avatar shot-avatar" href="#/app/users/{{shot.user.id}}">
+        <img ng-src="{{shot.user.avatar_url}}">
+      </a>
+      <a class="item shot-title" href="#/app/shots/{{shot.id}}">
+        {{shot.title}}
+      </a>
+      <a class="item shot-img" href="#/app/shots/{{shot.id}}">
+        <img ng-src="{{shot.images.hidpi}}">
+      </a>
+      <div class="item tabs tabs-secondary tabs-icon-left in">
+        <span class="tab-item assertive shot-tab">
+          <i class="icon ion-eye"></i>
+          {{shot.views_count}}
+        </span>
+        <span class="tab-item assertive shot-tab">
+          <i class="icon ion-android-favorite-outline"></i>
+          {{shot.likes_count}}
+        </span>
+        <span class="tab-item assertive shot-tab">
+          <i class="icon ion-android-chat"></i>
+          {{shot.comments_count}}
+        </span>
+      </div>
+    </div>
+    <ion-infinite-scroll
+      ng-if="moreShotsCanBeLoaded()"
+      on-infinite="loadMoreShots()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
