@@ -1,4 +1,4 @@
-angular.module('dribbble', ['ionic', 'ionic-material', 'dribbble.controllers'])
+angular.module('dribbble', ['ionic', 'ionic-material', 'ngCordova', 'ngResource'])
 
 .run(function($ionicPlatform, $http) {
   $ionicPlatform.ready(function() {
@@ -26,7 +26,7 @@ angular.module('dribbble', ['ionic', 'ionic-material', 'dribbble.controllers'])
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'appCtrl'
   })
 
   .state('login', {
@@ -67,3 +67,5 @@ angular.module('dribbble', ['ionic', 'ionic-material', 'dribbble.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/shots');
 });
+
+var dribbble = angular.module('dribbble')
