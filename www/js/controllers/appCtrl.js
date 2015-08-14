@@ -1,5 +1,15 @@
-dribbble.controller('appCtrl', function($ionicPopover, $scope, $http, $state, $ionicHistory, $timeout, ionicMaterialInk, ionicMaterialMotion, $cordovaToast) {
-
+dribbble.controller('appCtrl',
+ ['$scope',
+  '$http',
+  '$state',
+  '$timeout',
+  '$ionicHistory',
+  '$ionicPopover',
+  '$cordovaToast',
+  'ionicMaterialInk',
+  'ionicMaterialMotion',
+  'User',
+  function($scope, $http, $state, $timeout, $ionicHistory, $ionicPopover, $cordovaToast, ionicMaterialInk, ionicMaterialMotion, User) {
   $ionicPopover.fromTemplateUrl('templates/popover.html', {
     scope: $scope,
   }).then(function(popover) {
@@ -32,20 +42,18 @@ dribbble.controller('appCtrl', function($ionicPopover, $scope, $http, $state, $i
           });
         });
         ref.close();
-        $http({
-          method: 'GET',
-          url: 'https://api.dribbble.com/v1/user',
-          params: {
-            access_token: window.localStorage.getItem("access_token")
+        User.get()
+        .$promise.then(
+          function(value) {
+            $scope.user = value;
+            window.localStorage.setItem("user", $scope.user);
+          },
+          function(error) {
+            $ionicPopup.alert({
+              title: "网络连接发生错误",
+            });
           }
-        }).success(function(data) {
-          $scope.user = data;
-          window.localStorage.setItem("user", data);
-        }).error(function(data, status) {
-          $ionicPopup.alert({
-            title: "网络连接发生错误",
-          });
-        });
+        );
       }
     });
 
@@ -70,20 +78,18 @@ dribbble.controller('appCtrl', function($ionicPopover, $scope, $http, $state, $i
     });
     $state.go("app.shots");
     if (window.localStorage.getItem("access_token") !== "c4226c87da1275663814e68660c62509c7b66d572880f10cd276320d21a09e0e") {
-      $http({
-        method: 'GET',
-        url: 'https://api.dribbble.com/v1/user',
-        params: {
-          access_token: window.localStorage.getItem("access_token")
+      User.get()
+      .$promise.then(
+        function(value) {
+          $scope.user = value;
+          window.localStorage.setItem("user", $scope.user);
+        },
+        function(error) {
+          $ionicPopup.alert({
+            title: "网络连接发生错误",
+          });
         }
-      }).success(function(data) {
-        $scope.user = data;
-        window.localStorage.setItem("user", data);
-      }).error(function(data, status) {
-        $ionicPopup.alert({
-          title: "网络连接发生错误",
-        });
-      });
+      );
     }
   }
 
@@ -92,4 +98,4 @@ dribbble.controller('appCtrl', function($ionicPopover, $scope, $http, $state, $i
 
   // Set Motion
   ionicMaterialMotion.ripple();
-})
+}])

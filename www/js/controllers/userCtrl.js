@@ -1,24 +1,31 @@
-dribbble.controller('userCtrl', function($ionicLoading, $http, $scope, $stateParams, $ionicPopup) {
+dribbble.controller('userCtrl',
+ ['$scope',
+  '$stateParams',
+  '$ionicLoading',
+  '$ionicPopup',
+  'Users',
+  function($scope, $stateParams, $ionicLoading, $ionicPopup, Users) {
   $ionicLoading.show({
     template: 'Loading...',
   });
 
-  $http({
-    method: "GET",
-    url: 'https://api.dribbble.com/v1/users/' + $stateParams.userId,
-    params: {
-      access_token: window.localStorage.getItem("access_token")
+  Users.get(
+    {
+      userId: $stateParams.userId
+    }
+  )
+  .$promise.then(
+    function(value) {
+      $ionicLoading.hide();
+      $scope.user = value;
+      window.localStorage["user-" + $stateParams.userId] = JSON.stringify($scope.user);
     },
-    timeout: 3000
-  }).success(function(data) {
-    $ionicLoading.hide();
-    $scope.user = data;
-    window.localStorage["user-" + $stateParams.userId] = JSON.stringify($scope.user);
-  }).error(function() {
-    $ionicLoading.hide();
-    $scope.user = JSON.parse(window.localStorage["user-" + $stateParams.userId]);
-    $ionicPopup.alert({
-      title: "网络连接发生错误",
-    });
-  });
-})
+    function(error) {
+      $ionicLoading.hide();
+      $scope.user = JSON.parse(window.localStorage["user-" + $stateParams.userId]);
+      $ionicPopup.alert({
+        title: "网络连接发生错误",
+      });
+    }
+  )
+}])
