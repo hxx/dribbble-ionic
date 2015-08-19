@@ -1,6 +1,6 @@
 dribbble.controller('shotCtrl',
 [
-  '$window'
+  '$window',
   '$scope',
   '$http',
   '$stateParams',
