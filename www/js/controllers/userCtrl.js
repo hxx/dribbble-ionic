@@ -1,6 +1,6 @@
 dribbble.controller('userCtrl',
 [
-  '$window'
+  '$window',
   '$scope',
   '$stateParams',
   '$ionicLoading',
